@@ -85,7 +85,14 @@ const updateUser = async (req, res = response) => {
           message: 'Email already in use.'
         });
       } else {
-        data.email = email;
+        if (!user.google) {
+          data.email = email;
+        } else if (user.email !== email) {
+          return res.status(400).json({
+            status: 400,
+            message: 'Google users are unable to change its email.'
+          });
+        }
       }
     }    
     

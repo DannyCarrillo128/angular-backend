@@ -26,8 +26,8 @@ const search = async (req, res = response) => {
 const searchByCollection = async (req, res = response) => {
   
   const collection = req.params.name;
-  const search = req.params.search;
-  const regexp = new RegExp(search, 'i');
+  const query = req.params.query;
+  const regexp = new RegExp(query, 'i');
   let data = [];
 
   switch (collection) {

@@ -5,6 +5,6 @@ const { search, searchByCollection } = require('../controllers/global');
 const router = Router();
 
 router.get('/:search', jwtValidation, search);
-router.get('/collection/:name/:search', jwtValidation, searchByCollection);
+router.get('/collection/:name/:query', jwtValidation, searchByCollection);
 
 module.exports = router;
