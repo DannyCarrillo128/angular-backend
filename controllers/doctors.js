@@ -6,17 +6,50 @@ const Doctor = require('../models/doctor');
 //***************************************************************************
 const getDoctors = async (req, res = response) => {
 
-  const doctors = await Doctor.find()
-                              .populate('createdBy', 'name, image')
-                              .populate('updatedBy', 'name, image')
-                              .populate('hospital', 'name image');
+  const start = Number(req.query.start) || 0;
+
+  const [doctors, total] = await Promise.all([
+    Doctor.find()
+          .populate('createdBy', 'name profilePicture')
+          .populate('updatedBy', 'name profilePicture')
+          .populate('hospital', 'name image')
+          .skip(start)
+          .limit(5),
+    Doctor.countDocuments()
+  ]);
   
   res.json({
     status: 200,
-    doctors
+    doctors,
+    total
   });
 
 };
+
+//***************************************************************************
+//                               Get doctor
+//***************************************************************************
+const getDoctor = async (req, res = response) => {
+
+  try {
+    const { id } = req.params;
+  
+    const doctor = await Doctor.findById(id)
+                               .populate('hospital', 'name image');
+  
+    res.json({
+      status: 200,
+      doctor
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({  // If a response without status is sent,
+      status: 404,          // the error message doesn't appear.
+      message: 'Doctor not found.'
+    });
+  }
+
+}
 
 //***************************************************************************
 //                               Create doctor
@@ -112,4 +145,4 @@ const deleteDoctor = async (req, res = response) => {
 
 };
 
-module.exports = { getDoctors, createDoctor, updateDoctor, deleteDoctor };
+module.exports = { getDoctors, getDoctor, createDoctor, updateDoctor, deleteDoctor };

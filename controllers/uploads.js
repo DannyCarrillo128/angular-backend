@@ -4,6 +4,9 @@ const { response } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const { updateImage } = require('../helpers/updateImage');
 
+//***************************************************************************
+//                               Upload image
+//***************************************************************************
 const uploadImage = (req, res = response) => {
 
   const { collection, id } = req.params;
@@ -58,6 +61,9 @@ const uploadImage = (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Get image
+//***************************************************************************
 const getImage = (req, res = response) => {
 
   const { collection, image } = req.params;

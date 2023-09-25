@@ -3,6 +3,9 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 
+//***************************************************************************
+//                               Get users
+//***************************************************************************
 const getUsers = async (req, res) => {
 
   const start = Number(req.query.start) || 0;
@@ -22,6 +25,9 @@ const getUsers = async (req, res) => {
 
 };
 
+//***************************************************************************
+//                               Create user
+//***************************************************************************
 const createUser = async (req, res = response) => {
 
   const { email, password } = req.body;
@@ -61,6 +67,9 @@ const createUser = async (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Update user
+//***************************************************************************
 const updateUser = async (req, res = response) => {
   
   try {
@@ -112,6 +121,9 @@ const updateUser = async (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Delete user
+//***************************************************************************
 const deleteUser = async (req, res = response) => {
 
   try {

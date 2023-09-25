@@ -5,14 +5,22 @@ const Hospital = require('../models/hospital');
 //                               Get hospitals
 //***************************************************************************
 const getHospitals = async (req, res = response) => {
-  
-  const hospitals = await Hospital.find()
-                                  .populate('createdBy', 'name image')
-                                  .populate('updatedBy', 'name image');
+
+  const start = Number(req.query.start) || 0;
+
+  const [hospitals, total] = await Promise.all([
+    Hospital.find()
+            .populate('createdBy', 'name profilePicture')
+            .populate('updatedBy', 'name profilePicture')
+            .skip(start)
+            .limit(5),
+    Hospital.countDocuments()
+  ]);
 
   res.json({
     status: 200,
-    hospitals
+    hospitals,
+    total
   });
   
 };

@@ -3,6 +3,9 @@ const User = require('../models/user');
 const Hospital = require('../models/hospital');
 const Doctor = require('../models/doctor');
 
+//***************************************************************************
+//                               Search in all collections
+//***************************************************************************
 const search = async (req, res = response) => {
 
   const search = req.params.search;
@@ -23,6 +26,9 @@ const search = async (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Search in a collection
+//***************************************************************************
 const searchByCollection = async (req, res = response) => {
   
   const collection = req.params.name;

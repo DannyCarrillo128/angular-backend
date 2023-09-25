@@ -2,11 +2,12 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { jwtValidation } = require('../middlewares/jwtValidation');
 const { fieldsValidation } = require('../middlewares/fieldsValidation');
-const { getDoctors, createDoctor, updateDoctor, deleteDoctor } = require('../controllers/doctors');
+const { getDoctors, getDoctor, createDoctor, updateDoctor, deleteDoctor } = require('../controllers/doctors');
 
 const router = Router();
 
 router.get('/', jwtValidation, getDoctors);
+router.get('/:id', jwtValidation, getDoctor);
 router.post('/', [
   jwtValidation,
   check('name', `'Name' is a mandatory field.`).not().isEmpty(),

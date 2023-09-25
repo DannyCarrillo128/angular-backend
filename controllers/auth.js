@@ -4,6 +4,9 @@ const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 const { verify } = require('../helpers/verifyGoogleToken');
 
+//***************************************************************************
+//                               Sign in
+//***************************************************************************
 const login = async (req, res = response) => {
 
   try {
@@ -41,6 +44,9 @@ const login = async (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Google sign in
+//***************************************************************************
 const googleSignIn = async (req, res = response) => {
 
   try {
@@ -80,6 +86,9 @@ const googleSignIn = async (req, res = response) => {
 
 };
 
+//***************************************************************************
+//                               Renew user token
+//***************************************************************************
 const renewToken = async (req, res = response) => {
 
   const id = req.id;
