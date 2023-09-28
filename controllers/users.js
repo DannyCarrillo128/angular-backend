@@ -79,7 +79,7 @@ const updateUser = async (req, res = response) => {
     if (!user) {
       return res.status(404).json({
         status: 400,
-        message: `User doesn't exist.`
+        message: 'User not found.'
       });
     }
 
@@ -133,7 +133,7 @@ const deleteUser = async (req, res = response) => {
     if (!user) {
       return res.status(404).json({
         status: 400,
-        message: `User doesn't exist.`
+        message: 'User not found.'
       });
     }
 

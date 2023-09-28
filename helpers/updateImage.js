@@ -18,7 +18,7 @@ const updateImage = async (collection, id, fileName) => {
       const user = await User.findById(id);
 
       if (!user) {
-        console.log(`User doesn't exist.`);
+        console.log('User not found.');
         return false;
       }
 

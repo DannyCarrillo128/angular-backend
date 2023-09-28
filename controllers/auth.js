@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 const { verify } = require('../helpers/verifyGoogleToken');
+const { getSidebarMenu } = require('../helpers/sidebar-menu');
 
 //***************************************************************************
 //                               Sign in
@@ -30,9 +31,12 @@ const login = async (req, res = response) => {
 
     const token = await generateJWT(user.id);
 
+    const menu = getSidebarMenu(user.role);
+
     res.json({
       status: 200,
-      token
+      token,
+      menu
     });
   } catch (error) {
     console.log(error);
@@ -72,9 +76,12 @@ const googleSignIn = async (req, res = response) => {
 
     const token = await generateJWT(user.id);
 
+    const menu = getSidebarMenu(existingUser.role);
+
     res.json({
       status: 200,
-      token
+      token,
+      menu
     });
   } catch (err) {
     console.log(err);
@@ -97,10 +104,13 @@ const renewToken = async (req, res = response) => {
 
   const user = await User.findById(id);
 
+  const menu = getSidebarMenu(user.role);
+
   res.json({
     status: 200,
     token,
-    user
+    user,
+    menu
   });
 
 };
